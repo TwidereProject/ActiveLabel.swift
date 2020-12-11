@@ -9,7 +9,7 @@
 import UIKit
 
 public protocol ActiveLabelDelegate: class {
-    func didSelectEntity(_ entity: ActiveEntity)
+    func activeLabel(_ activeLabel: ActiveLabel, didSelectActiveEntity entity: ActiveEntity)
 }
 
 public class ActiveLabel: UILabel {
@@ -150,10 +150,10 @@ extension ActiveLabel {
         
         switch touch.phase {
         case .began, .moved, .regionEntered, .regionMoved:
-            if let element = entity(at: location) {
-                if element.range.location != selectedEntity?.range.location || element.range.length != selectedEntity?.range.length {
+            if let entity = entity(at: location) {
+                if entity.range.location != selectedEntity?.range.location || entity.range.length != selectedEntity?.range.length {
                     updateAttributesWhenSelected(false)
-                    selectedEntity = element
+                    selectedEntity = entity
                     updateAttributesWhenSelected(true)
                 }
                 avoidSuperCall = true
@@ -162,8 +162,8 @@ extension ActiveLabel {
                 selectedEntity = nil
             }
         case .ended, .regionExited:
-            guard let selectedElement = selectedEntity else { return avoidSuperCall }
-            delegate?.didSelectEntity(selectedElement)
+            guard let selectedEntity = selectedEntity else { return avoidSuperCall }
+            delegate?.activeLabel(self, didSelectActiveEntity: selectedEntity)
             
             let when = DispatchTime.now() + Double(Int64(0.25 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
             DispatchQueue.main.asyncAfter(deadline: when) {
