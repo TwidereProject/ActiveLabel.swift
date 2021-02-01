@@ -20,10 +20,10 @@ public class ActiveEntity {
 extension ActiveEntity {
     public var primaryText: String {
         switch self.type {
-        case .email(let text):          return text
-        case .hashtag(let text):        return text
-        case .mention(let text):        return text
-        case .url(let text, _):         return text
+        case .email(let text, _):          return text
+        case .hashtag(let text, _):        return text
+        case .mention(let text, _):        return text
+        case .url(let text, _, _):         return text
         }
     }
 }
