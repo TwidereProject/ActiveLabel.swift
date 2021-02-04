@@ -8,8 +8,8 @@
 import Foundation
 
 public enum ActiveEntityType {
-    case mention(_ mention: String, userInfo: [AnyHashable: Any]? = nil)
-    case hashtag(_ hashtag: String, userInfo: [AnyHashable: Any]? = nil)
-    case email(_ email: String, userInfo: [AnyHashable: Any]? = nil)
-    case url(original: String, trimmed: String, userInfo: [AnyHashable: Any]? = nil)
+    case mention(_ text: String, userInfo: [AnyHashable: Any]? = nil)
+    case hashtag(_ text: String, userInfo: [AnyHashable: Any]? = nil)
+    case email(_ text: String, userInfo: [AnyHashable: Any]? = nil)
+    case url(_ text: String, trimmed: String, url: String, userInfo: [AnyHashable: Any]? = nil)
 }

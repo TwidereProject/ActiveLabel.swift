@@ -23,7 +23,7 @@ extension ActiveEntity {
         case .email(let text, _):          return text
         case .hashtag(let text, _):        return text
         case .mention(let text, _):        return text
-        case .url(let text, _, _):         return text
+        case .url(let text, _, _, _):      return text
         }
     }
 }
